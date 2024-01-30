@@ -1,1 +1,5 @@
 TextBooks/
+*
+!*.cpp
+!*.h
+!.gitignore
