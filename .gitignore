@@ -1,6 +1,6 @@
 # Ignore TextBooks and Homework4 directories
 TextBooks/
-Homework4/
+Homework5/
 
 # Ignore binary files (examples)
 *.exe
