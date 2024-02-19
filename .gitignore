@@ -1,8 +1,8 @@
-# Ignore TextBooks and Homework4 directories
+# Ignore TextBooks and Non Submitted Homework directories
 TextBooks/
-Homework5/
+Exams/
 
-# Ignore binary files (examples)
+# Ignore binary files
 *.exe
 *.dll
 *.so

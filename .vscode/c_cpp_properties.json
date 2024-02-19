@@ -1,19 +1,15 @@
 {
     "configurations": [
         {
-            "name": "macos-clang-arm64",
+            "name": "macos-gcc-arm64",
             "includePath": [
                 "${workspaceFolder}/**",
                 "/Users/ivanaristy/Desktop/Classes/Tandon Bridge/HomeWork4",
                 "/Users/ivanaristy/Desktop/Classes/Tandon Bridge/"
             ],
-            "cStandard": "c11",
-            "cppStandard": "c++14",
-            "intelliSenseMode": "macos-clang-arm64",
-			"compilerPath": "/opt/homebrew/Cellar/gcc/13.2.0/bin/g++-13",
-            "compilerArgs": [
-                ""
-            ]
+            "intelliSenseMode": "macos-gcc-arm64",
+            "compilerPath": "/usr/bin/gcc"
+			
         }
     ],
     "version": 4
