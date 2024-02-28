@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": ".",
-      "program": "build/Debug/outDebug"
+      "cwd": "/Users/ivanaristy/Desktop/Classes/Tandon Bridge/HomeWork6",
+      "program": "/Users/ivanaristy/Desktop/Classes/Tandon Bridge/HomeWork6/build/Debug/outDebug"
     }
   ]
 }

@@ -8,6 +8,7 @@ Exams/
 *.so
 *.o
 *.bin
+*.icloud
 
 # Exception rules: Include .cpp, .h files and .gitignore
 !*.cpp
