@@ -1,24 +1,20 @@
 {
   "version": "0.2.0",
   "configurations": [
-    {
-      "name": "C/C++ Runner: Debug Session",
-      "type": "cppdbg",
-      "request": "launch",
-      "args": [],
-      "stopAtEntry": false,
-      "externalConsole": false,
-      "cwd": ".",
-      "program": "build/Debug/outDebug",
-      "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        }
-      ]
-    }
-  ]
+	{
+		"type": "java",
+		"name": "HelloWorld",
+		"request": "launch",
+		"mainClass": "HelloWorld",
+		"projectName": "Tandon Bridge_549e51ac"
+	},
+	{
+		"name": "C/C++ Runner: Debug Session",
+		"type": "lldb",
+		"request": "launch",
+		"args": [],
+		"cwd": "/Users/ivanaristy/Desktop/Classes/Tandon Bridge/HomeWork8",
+		"program": "/Users/ivanaristy/Desktop/Classes/Tandon Bridge/HomeWork8/build/Debug/outDebug"
+	}
+]
 }
