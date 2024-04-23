@@ -115,7 +115,9 @@
 	"utility": "cpp",
 	"stop_token": "cpp",
 	"thread": "cpp",
-	"execution": "cpp"
+	"execution": "cpp",
+	"list": "cpp",
+	"stack": "cpp"
 },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
@@ -174,5 +176,5 @@
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
-  "C_Cpp.default.compilerPath": "usr/bin/g++"
+  "C_Cpp.default.compilerPath": "/usr/bin/gcc"
 }

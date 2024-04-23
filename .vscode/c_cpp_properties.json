@@ -6,7 +6,7 @@
                 "${workspaceFolder}/**"
             ],
             "intelliSenseMode": "macos-gcc-arm64",
-            "compilerPath": "/usr/bin/gcc",
+            "compilerPath": "usr/bin/g++",
             "cStandard": "c17",
             "cppStandard": "c++17"
         }

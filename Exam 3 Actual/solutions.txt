@@ -1,0 +1,243 @@
+Name: Ivan E. Aristy
+
+NYU Email: iae225@nyu.edu
+
+Solutions to midterm exam
+
+Question 1 (Multiple choice answer):
+C. Function for a List class to return it's last node
+
+Question 2 (Multiple choice answer):
+C. Scope Resolution
+
+Question 3 (Multiple choice answer):
+B. Never Allowed
+
+Question 4 (Expression):
+(2+3)*4-5-6 -> 23+4*56--
+
+Question 5 (Value):
+3 2 * 2 – 2 / -> 2 (3*2=6-2=4/2=2)
+
+Question 6 (Algorithm; English answer):
+Given a binary search tree of integers without a stored height parameters in each
+node, explain, in English, not code, how you would, as efficiently as possible, determine
+if the tree would be considered balanced as an AVL tree. Please include the runtime of
+your algorithm.
+
+First of all, in an AVL tree, we have to understand what it means to be unbalanced:
+For an AVL tree to be unbalanced it means that for some node in the tree, 
+the height between it's children is +2 more or equal than the other. 
+Since we do not have height variables, we must recursively compute them.
+We can utilize a post order traversal where at every node (starting at the root),
+the node asks his leftchild to give them the height (int heightFromLeft = myRecursiveFunction(me->left))
+then that same node, after getting the height of the left, should ask the right child to do the same
+(int heightFromRight = myRecursiveFunction(me->right)). 
+After the node has gotten the height from left and right subtrees/nodes recursively, 
+it will proceed to make it's determination by either setting some global flag to false, 
+or just exiting and printing an exception.
+This algorithm is O(N), where n is the number of nodes, in runtime since it will at most traverse every node once.
+As a bonus, this algorithm will use O(H) space where H is the height of the tree.
+
+Question 7 (Algorithm; English answer):
+You are given a pointer to an arbitrary node in a doubly linked list of integers
+and asked to sort the list. Explain, in English, not code, how you would do this if the list
+was exceedingly large and could only be stored once in memory.
+
+Node problems really lean themselves to be sorted by mergesort because the nodes already 
+exist in memory. So, I will be implementing a mergesort algorithm.
+First we need to find the range we can consider our "helper" function in this context.
+We will go all the way to the left or to the right with a pointer. This will be O(N) and O(1) extra space.
+By the end of this we have a pointer to a node we can consider the head node (since it does not really matter
+if we chose to go left or right) and the arbitrary pointer we were given at the start.
+Now we can proceed to detach the lists by setting the node that comes before our arbitrary pointer's next to null,
+and then we pass the nodes to our recursive mergesort.
+Now, the function will continue to detach the nodes untill there is only singleton nodes remaining,
+and, on the way back we will do a simple merging algorithm that assumes that the nodes are sorted,
+which by definition they will be at this point. 
+On the way back the algorithm returns a reference to the head node of the two merged sublists,
+by the end of it we have a head pointer to a fully sorted list without using any extra space.
+On the first pass of this algorithm we could potentially be chosing the worst spot ever to break the list,
+since after all we got an arbitrary pointer; however, this does not matter in the grand scheme.
+We will end up sorting the list in N*logN time because afterwards we always break the lists in halves.
+
+Question 8 (Program):
+Given two files (1.txt and 2.txt; they are guaranteed to exist) which both contain
+integers in sorted order we would like to produce a new file (3.txt) which contains all of
+the integers in sorted order. Each integer is on a line by itself in each of the two input
+files and should be similar in the output file. The files are very large and cannot be stored
+in memory. If any duplicates exist, they should be included in the resulting file (i.e. if
+one number appears in both files, it will appear twice in the output file).
+
+The files are very large and cannot be stored in memory.
+
+So this is just basically the merge part of mergesort but with immediate outputting:
+
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main () {
+
+	ifstream left;
+	ifstream right;
+	ofstream output;
+
+	left.open("1.txt");
+	right.open("2.txt");
+	output.open("3.txt");
+
+	int leftCurr;
+	int rightCurr;
+
+	left >> leftCurr;
+	right >> rightCurr;
+
+	while(!left.eof() && !right.eof()){
+
+		while(leftCurr < rightCurr){
+			output << leftCurr;
+			output << '\n';
+			if(left.eof()) break;
+			left >> leftCurr;
+		}
+		while(rightCurr <= leftCurr){
+			output << rightCurr;
+			output << '\n';
+			if(right.eof()) break;
+			right >> rightCurr;
+		}
+	}
+
+	if(left.eof() && right.eof()){
+		if(leftCurr > rightCurr){
+			output << rightCurr << '\n';
+			output << leftCurr;
+		}else{
+			output << leftCurr << '\n';
+			output << rightCurr;
+		}
+	} else if(left.eof()){
+		output << rightCurr << '\n';
+		while(true){
+			if(right.eof()) break;
+			right >> rightCurr;
+			output << rightCurr << '\n';
+		}
+		output << rightCurr << '\n';
+	}else if(right.eof()){
+		output << leftCurr << '\n';
+		while(true){
+			if(left.eof()) break;
+			left >> leftCurr;
+			output << leftCurr << '\n';
+		}
+		output << leftCurr << '\n';
+	}
+
+	return 0;
+}
+
+Question 9 (Program):
+
+Given a pointer to the root of a binary search tree (has left, right, and parent
+pointers as well as a data section) write a function (or functions) which will return an
+STL list (you should not define this class, it’s already included) with all of the values
+from the tree in level order. Your code should run in theta(N) time.
+
+list<T>& BST::func(Node *nodePtr) const{
+	list<T> myList;
+
+	deque<Node> level; 
+
+	level.push_front(*nodePtr);
+
+	while(!level.empty()){
+		int currLevelSize = level.size();
+		//honestly i realized this level thing is kind of meaningless on a second pass,
+		//but it makes it a bit more expandable i guess.
+		while(currLevelSize > 0){
+			
+			Node *ptr = &level.front();
+			level.pop_front();
+			
+			if(ptr->left != nullptr) level.push_back(*ptr->left);
+			if(ptr->right != nullptr) level.push_back(*ptr->right);
+
+			myList.push_back(ptr->data);
+			
+			currLevelSize--;
+		}
+	}
+	return myList;
+}
+
+Question 10: (Classes):
+
+Our company manufactures television and computer screens. We’re going to
+design a program to handle our inventory and you are being asked to design classes for
+the program. Both types of devices have a function to display an image on the screen
+(showImage). For simplicity, this function will take an integer and display it on the
+screen (cout) followed by the text “Television” or “Computer” as appropriate for the type
+of screen. We will need to, eventually, store all of these objects in a vector in order to
+keep track of our inventory so please allow for that possibility and make sure that both
+are guaranteed to have the “showImage” function implemented.
+
+I assume that this is a typo, and that it is a verctor of not furniture but what our company actually manufactures:
+
+Design the necessary classes and provide a main function to put three chairs into a vector
+of Furniture object pointers.
+
+/*Electronic
+virtual: showimage
+	-> television
+	-> computer */
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Electronic{
+	public:
+		virtual void showImage(int integer) const = 0;
+
+};
+
+class Television : public Electronic{
+
+	public:
+		void showImage(int integer) const override {
+			cout << integer << " Television" << endl;
+		}
+};
+
+class Computer : public Electronic{
+
+	public:
+		void showImage(int integer) const override {
+			cout << integer << " Computer" << endl;
+		}
+};
+
+int main(){
+
+	vector<Electronic*> electronics;
+
+	Computer *aComputer = new Computer();
+	Television *aTelevision= new Television();
+	Television *aNotherTelevision= new Television();
+
+	electronics.push_back(aComputer);
+	electronics.push_back(aTelevision);
+	electronics.push_back(aNotherTelevision);
+
+	int anInt = 0;
+
+	for(const auto& elec : electronics){
+		elec->showImage(anInt++);
+	}
+
+	return 0;
+}
